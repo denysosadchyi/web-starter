@@ -1,75 +1,161 @@
 # web-starter
 
-Vanilla HTML + CSS + JS skeleton for any new website project. No build step, no framework, no lock-in. Designed to be paired with **Claude Code** (or any AI coding assistant) so designers can build sites without producing AI-slop.
+Готовий каркас сайту, щоб дизайнер міг швидко зробити лендінг (або будь-яку сторінку) разом із Claude Code, не отримавши на виході типовий AI-слоп.
 
-## What's inside
+Якщо ти ніколи не писав код і чуєш слова "репозиторій" чи "термінал" вперше: спокійно, нижче все по кроках.
 
-- **`starter/`** — the actual project skeleton. Copy this into a new project folder.
-  - `CLAUDE.md` — auto-loaded into Claude Code's context. Contains all hard rules.
-  - `.claude/commands/` — project-scoped slash commands (`/component`, `/hero`, `/audit-slop`, `/mobile-check`, `/new-token`).
-  - `.claude/settings.json` — pre-approved permission allowlist (less prompt spam).
-  - `assets/css/tokens.css` + neutral defaults; reference components (header, footer, buttons, faq, form-input, example-card).
-- **`docs/`** — conventions, rules, playbooks. Read before writing code.
-- **`templates/`** — deploy configs for Netlify / Vercel / GitHub Pages.
-- **`scripts/lint-tokens.sh`** — find hardcoded hex/px/em-dash before commit.
+## Що це таке простими словами
 
-## Quick start
+Це папка з:
 
-```bash
-git clone https://github.com/denysosadchyi/web-starter.git my-new-site
-cd my-new-site
-rm -rf .git && git init
-cd starter && python3 -m http.server 8000
-# open http://localhost:8000
+- **Заготовкою сайту.** HTML, CSS, JS уже написані. Шрифти, кольори, відступи, мобільна адаптація. Все вже працює.
+- **Правилами для AI.** Коли просиш Claude Code зробити нову секцію, він автоматично знає, що НЕ можна робити (фіолетові градієнти, glass-картки, центрування всього). І завжди працює за конвенцією.
+- **Інструкціями для тебе.** Де брати фото, як писати тексти без AI-фраз, як викласти сайт онлайн.
+
+## Що ти отримуєш
+
+- Сайт працює одразу. Відкриваєш браузер, бачиш сторінку.
+- Дизайн виглядає чисто, без AI-патернів.
+- Коли просиш Claude Code щось додати, результат буде в стилі решти сайту, не "новий компонент із Tailwind-туторіалу".
+- Коли готово, викладаєш онлайн за 2 хвилини (Netlify, Vercel або GitHub Pages).
+
+## Що тобі знадобиться
+
+1. **Claude Code** встановлений: <https://claude.com/claude-code>
+2. **Git** встановлений (на Mac уже є; на Windows: <https://git-scm.com>)
+3. **Python** для локального превʼю (на Mac/Linux уже є; на Windows встановити з python.org)
+4. **Будь-який редактор коду:** VS Code (безкоштовно, рекомендований), Cursor, Sublime, що завгодно
+
+Якщо чогось бракує, можна без всього перерахованого завантажити репо ZIP-ом, але працювати з Claude Code зручніше через термінал.
+
+## Як почати (5 хвилин)
+
+### Крок 1. Скачай репо
+
+Відкрий термінал (на Mac: Cmd+Space, далі "Terminal"; на Windows: PowerShell). Перейди в папку, де хочеш зберегти проект, і виконай:
+
+```
+git clone https://github.com/denysosadchyi/web-starter.git my-site
+cd my-site
 ```
 
-Replace `--font-base` and `--brand` in `starter/assets/css/tokens.css` with the real font and palette. Everything else cascades.
+Тепер у тебе є папка `my-site` із усім необхідним.
 
-## Read these in order
+### Крок 2. Запусти превʼю
 
-For **designers using Claude Code**:
+Усе в терміналі, із папки `my-site`:
 
-1. [Start here](docs/00-start-here.md) — first 30 min onboarding (UA)
-2. [Anti-slop](docs/anti-slop.md) — patterns that mark a design as AI-generated; do not produce them
-3. [Copy rules](docs/copy-rules.md) — how to write text that doesn't read as ChatGPT (UA)
-4. [Assets workflow](docs/assets-workflow.md) — where to get photos / icons / fonts (UA)
-
-For **developers** building the actual site:
-
-5. [Architecture](docs/architecture.md) — folder structure, component conventions, hard rules
-6. [Tokens](docs/tokens.md) — design tokens (single source of truth)
-7. [Type system](docs/type-system.md) — typography rules
-8. [Responsive](docs/responsive.md) — two-breakpoint convention + mobile playbook
-9. [Preview](docs/preview.md) — local dev / LAN preview / deploy
-
-## Slash commands (inside Claude Code)
-
-When working on a project copied from this starter, these commands are available:
-
-- `/component <name>` — create a new CSS component following project conventions
-- `/hero <project description>` — generate a hero section without AI-slop patterns
-- `/audit-slop` — scan current code for anti-slop patterns
-- `/mobile-check` — run the mobile adaptation checklist on current code
-- `/new-token <name> <value>` — add a design token to `tokens.css` properly
-
-## Lint
-
-```bash
-./scripts/lint-tokens.sh
+```
+cd starter
+python3 -m http.server 8000
 ```
 
-Catches: hardcoded hex colors, hardcoded `rgb()`/`rgba()` (use rgba(var(--*-rgb)) instead), hardcoded `font-size px`, hardcoded `font-weight` numbers, em-dashes in HTML copy. Run before every commit.
+Відкрий браузер: <http://localhost:8000>. Має відкритися готова сторінка-зразок.
 
-## Philosophy
+Не закривай термінал, він тримає сервер. Коли захочеш зупинити: Ctrl+C.
 
-- **Vanilla.** No framework lock-in. Everything ports to any stack in an afternoon.
-- **Tokens first.** Every color, size, weight, shadow, radius lives in `tokens.css`. Hardcoding in a component is a bug.
-- **One file per component.** Self-contained, scoped, readable. Drop-in reusable across pages.
-- **Two breakpoints, period.** 980 (tablet) and 720 (mobile). If layout breaks between them, fix the layout.
-- **Anti-slop is non-negotiable.** Read `docs/anti-slop.md` before any visual work. Default = slop. Pick the less-default answer.
+### Крок 3. Відкрий проект у Claude Code
 
-## What this is not
+В іншому терміналі (або новій вкладці), із кореня проекту:
 
-- Not a UI library. There are no pre-built widgets to import.
-- Not opinionated about fonts or colors. Tokens ship neutral; pick a real palette and font on day 1.
-- Not a build system. If a project grows to need bundling, lift the pieces out and put them in your bundler of choice.
+```
+claude
+```
+
+Спитай: "які жорсткі правила цього проекту?". Claude має відповісти посиланнями на токени, anti-slop, два брейкпоінти. Якщо так, все працює, можна починати.
+
+### Крок 4. Зміни базові штуки під свій бренд
+
+Відкрий у редакторі файл `starter/assets/css/tokens.css`. Замінити треба дві речі:
+
+```css
+--font-base: system-ui, ...    /* твій шрифт */
+--brand:     #2563eb;          /* твій основний колір */
+--brand-rgb: 37, 99, 235;      /* той же колір у RGB */
+```
+
+Все інше (інші кольори, тіні, кнопки, картки) автоматично підхопить нові значення.
+
+Як знайти RGB конкретного hex-кольору: загугли "hex to rgb" або спитай Claude.
+
+### Крок 5. Проси Claude робити секції
+
+Замість "зроби мені hero", використовуй вбудовані команди:
+
+```
+/hero  фітнес-маркетплейс із оплатою за тренування
+```
+
+Claude використає правильні токени, не зробить glass-картки, не накидає 5 кнопок-primary, поставить адаптацію під мобайл.
+
+Інші команди:
+
+- `/component <ім'я>` створює нову секцію за конвенцією
+- `/audit-slop` перевіряє поточний код на AI-патерни
+- `/mobile-check` перевіряє мобільну адаптацію
+- `/new-token <ім'я> <значення>` додає design-токен
+
+## Куди читати далі
+
+Якщо хочеш зрозуміти ширше:
+
+1. **`docs/00-start-here.md`**: детальна інструкція для перших 30 хвилин. Українською. Прочитай хоча б цей.
+2. **`docs/anti-slop.md`**: список AI-патернів, яких уникаєш. Тримай під рукою при першому проекті.
+3. **`docs/copy-rules.md`**: як писати тексти без "leverage / unleash / у сучасному світі". Українською.
+4. **`docs/assets-workflow.md`**: де брати фото (Imagen, Unsplash), іконки (Lucide), як стиснути. Українською.
+
+Технічні деталі (для дева, якщо хочеш передавати на доробку):
+
+- `docs/architecture.md`: структура файлів, конвенції CSS
+- `docs/tokens.md`: система токенів
+- `docs/type-system.md`: типографіка
+- `docs/responsive.md`: мобільна адаптація
+- `docs/preview.md`: налаштування превʼю
+
+## Як викласти сайт онлайн
+
+Коли готовий, є три легкі варіанти. Деталі в `templates/README.md`.
+
+**Найпростіший: Netlify**
+
+1. Зайди на <https://app.netlify.com>
+2. Зареєструйся (можна через GitHub)
+3. Перетягни папку `starter/` мишкою у вікно
+4. Через 30 секунд отримаєш URL виду `random-name.netlify.app`. Можеш привʼязати свій домен.
+
+**Якщо проект уже на GitHub: Vercel або GitHub Pages**
+
+Конфіги є в папці `templates/`. Скопіюй потрібний у корінь проекту, далі за інструкцією в `templates/README.md`.
+
+## Що НЕ робити
+
+- Не питай Claude "зроби сайт як у Stripe / Linear". Отримаєш дешеву копію без характеру. Опиши свою функцію, а вигляд керуй через токени.
+- Не міняй HTML руками, якщо не впевнений. Краще опиши Claude що треба, він напише за конвенцією.
+- Не додавай свої кольори через `style="color: red"` в HTML. Все через токени в `tokens.css`. Інакше через тиждень дизайн розвалиться.
+- Не клади 10 МБ-фото в hero. Перед використанням стисни в WebP (інструкція в `docs/assets-workflow.md`).
+- Не клади Inter / Roboto / Plus Jakarta Sans як єдиний шрифт без display-pair. Це AI-маркер. Деталі в anti-slop.
+
+## Якщо щось не працює
+
+- **Команда `git` не знайдена** → встанови git: <https://git-scm.com/downloads>
+- **Команда `python3` не знайдена** → встанови Python: <https://python.org/downloads>
+- **Сторінка не відкривається на localhost:8000** → перевір що термінал у папці `starter/` і що сервер запущений
+- **Зміни в CSS не підхоплюються** → жорсткий рефреш браузера: Ctrl+Shift+R (Cmd+Shift+R на Mac)
+- **Claude генерить код, який не схожий на решту** → нагадай йому: "перевір `CLAUDE.md`, я хочу за конвенцією проекту"
+
+## Філософія
+
+- **Без фреймворків.** Чистий HTML+CSS+JS. Коли захочеш перенести на React, дев перенесе за вечір.
+- **Тільки токени.** Усе візуальне (кольори, розміри, тіні) живе в одному файлі. Захотів змінити бренд: один файл, увесь сайт оновився.
+- **Anti-slop по дефолту.** Перший варіант, який видає AI, зазвичай слоп. Завжди питай "це вибір, чи дефолт?".
+- **Два брейкпоінти. Все.** Десктоп, планшет (980), мобайл (720). Якщо ламається, виправляй компонент, не додавай третій брейкпоінт.
+
+## Що це не таке
+
+- Не бібліотека UI-компонентів. Тут є тільки приклади (header, footer, кнопки, FAQ, форма). Не очікуй "повної дизайн-системи на 200 компонентів".
+- Не білдер сайтів типу Tilda. Тут треба трошки розуміти HTML/CSS, або просити Claude.
+- Не SEO-оптимізований шаблон. Базова семантика є, але мета-теги, sitemap, schema.org доведеться додати самому (Claude поможе).
+
+---
+
+Питання, баги, побажання: <https://github.com/denysosadchyi/web-starter/issues>
