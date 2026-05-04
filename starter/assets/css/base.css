@@ -1,0 +1,92 @@
+/* ==========================================================================
+   base.css — element resets, typography defaults, link/img/button defaults
+   Loaded after tokens.css. Sets the baseline before any component CSS runs.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-base);
+  color: var(--ink);
+  background: var(--bg);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Typography defaults — components override per role */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-heading);
+}
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-display); line-height: var(--lh-display); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); line-height: var(--lh-card); letter-spacing: var(--ls-snug); }
+h4 { font-size: var(--fs-h4); letter-spacing: var(--ls-base); }
+
+p { margin: 0; }
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .15s ease;
+}
+a:hover { color: var(--brand-ink); }
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+img { height: auto; }
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Visually hidden (accessible) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Responsive type defaults ────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  h1 { font-size: var(--fs-h1-md); }
+}
+@media (max-width: 720px) {
+  h1 { font-size: var(--fs-h1-sm); }
+  h2 { font-size: var(--fs-h2-sm); }
+}

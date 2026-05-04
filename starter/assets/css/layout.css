@@ -1,0 +1,61 @@
+/* ==========================================================================
+   layout.css — page-level layout primitives
+   .container — max-width wrapper used everywhere.
+   section.block — standard vertical rhythm for content sections.
+   .block-head / .block-foot — section heading/footer pattern (kicker + h2 + p).
+   ========================================================================== */
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+/* Standard content section */
+section.block { padding: var(--space-88) 0; }
+section.block.alt { background: var(--bg-soft); }
+section.block.dark { background: var(--bg-dark); color: #fff; }
+section.block.tight-top { padding-top: var(--space-44, var(--space-40)); }
+
+/* Section heading group (kicker + h2 + lead paragraph) */
+.block-head {
+  text-align: center;
+  margin-bottom: var(--space-40);
+}
+.block-head .kicker {
+  display: inline-block;
+  margin-bottom: var(--space-12);
+  font-size: var(--fs-kicker);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--brand-ink);
+}
+.block-head h1,
+.block-head h2 {
+  margin: 0 0 var(--space-12);
+}
+.block-head p {
+  margin: 0 auto;
+  color: var(--ink-3);
+  font-size: var(--fs-lead);
+  max-width: 60ch;
+}
+.block-head.left { text-align: left; }
+.block-head.left p { margin-left: 0; }
+
+/* Section footer (e.g. "Browse all" link under a card grid) */
+.block-foot {
+  text-align: center;
+  margin-top: var(--space-40);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  /* Phone container padding: 16px L/R is the consistent edge gutter for
+     all content blocks. */
+  .container { padding: 0 var(--space-16); }
+  section.block { padding: var(--space-56) 0; }
+  section.block.tight-top { padding-top: var(--space-28); }
+  .block-head { margin-bottom: var(--space-28); }
+}

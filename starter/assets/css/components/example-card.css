@@ -1,0 +1,45 @@
+/* ==========================================================================
+   example-card.css — minimal card component, used as a convention example
+   Markup: <article class="card"><h3>...</h3><p>...</p></article>
+           Wrap N cards in <div class="card-grid">.
+   Notes:  delete this component once your project has real ones — it's a
+           reference for the file template, not a UI library piece.
+   ========================================================================== */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-24);
+}
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  padding: var(--space-24);
+  box-shadow: var(--shadow-sm);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+  margin: 0 0 var(--space-8);
+  color: var(--ink);
+}
+.card p {
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .card-grid { grid-template-columns: 1fr; gap: var(--space-16); }
+  .card { padding: var(--space-16); }
+}

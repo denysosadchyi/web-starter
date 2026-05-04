@@ -1,0 +1,160 @@
+/* ==========================================================================
+   tokens.css — design tokens
+   Single source of truth for all visual values. Every other CSS file should
+   reference these tokens, never hard-code colors / sizes / weights / shadows.
+
+   On day 1 of a new project: pick a font, pick a brand color, replace the
+   placeholders below. Everything else propagates automatically.
+   ========================================================================== */
+
+:root {
+  /* ── Font families ─────────────────────────────────────────────────────── */
+  /* Replace `system-ui` with a real face once chosen. Avoid Inter, Roboto,
+     Geist, Plus Jakarta Sans, Space Grotesk as the only family — overused.
+     See docs/anti-slop.md and docs/type-system.md. */
+  --font-base:    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-base);  /* override with a contrasting display face */
+
+  /* ── Font sizes ────────────────────────────────────────────────────────── */
+  /* Display & headings */
+  --fs-h1:        48px;
+  --fs-h1-md:     42px;   /* ≤980 */
+  --fs-h1-sm:     30px;   /* ≤720 */
+  --fs-h2:        38px;
+  --fs-h2-sm:     24px;   /* ≤720 */
+  --fs-h3:        22px;
+  --fs-h4:        18px;
+
+  /* Display metrics (numbers) */
+  --fs-metric:    30px;
+  --fs-metric-sm: 26px;
+
+  /* Body */
+  --fs-body:      16px;
+  --fs-subhead:   19px;
+  --fs-lead:      16.5px;
+  --fs-sm:        14px;
+  --fs-caption:   13px;
+  --fs-micro:     12px;
+
+  /* Labels & controls */
+  --fs-kicker:    12px;
+  --fs-label:     11px;
+  --fs-badge:     11.5px;
+  --fs-btn:       15px;
+  --fs-btn-sm:    14px;
+  --fs-btn-lg:    16px;
+  --fs-input:     15.5px;
+
+  /* ── Font weights ──────────────────────────────────────────────────────── */
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-display:   800;
+
+  /* ── Tracking ──────────────────────────────────────────────────────────── */
+  --ls-tight:    -0.02em;
+  --ls-snug:     -0.01em;
+  --ls-base:     0;
+  --ls-wide:     0.04em;
+  --ls-wider:    0.08em;
+  --ls-widest:   0.12em;
+
+  /* ── Leading ───────────────────────────────────────────────────────────── */
+  --lh-display:  1.08;
+  --lh-heading:  1.15;
+  --lh-tight:    1;
+  --lh-card:     1.3;
+  --lh-body:     1.5;
+  --lh-prose:    1.6;
+
+  /* ── Text colors ───────────────────────────────────────────────────────── */
+  --ink:         #1a2333;
+  --ink-rgb:     26, 35, 51;       /* rgb fragment for rgba() composition */
+  --ink-2:       #2b3447;
+  --ink-3:       #475569;
+  --muted:       #6b7280;
+
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  --bg:          #ffffff;
+  --bg-soft:     #f1f4f7;          /* alt section tint */
+  --bg-3:        #f4f6fa;          /* subtle gray surface */
+  --bg-elevated: #fdfdfd;          /* near-white pill / floating elements */
+  --bg-dark:     #0b1220;          /* deep slate (footer, dark CTA blocks) */
+  --bg-dark-rgb: 11, 18, 32;       /* rgb fragment for rgba() composition */
+
+  /* ── Borders ───────────────────────────────────────────────────────────── */
+  --line:        #e5e7eb;
+  --line-2:      #f1f5f9;
+  --line-soft:   rgba(var(--ink-rgb), .05);  /* subtle ink-tinted stroke */
+
+  /* ── Brand & accent ────────────────────────────────────────────────────── */
+  /* Replace the brand hue with the project's actual primary color. */
+  --brand:         #2563eb;
+  --brand-rgb:     37, 99, 235;
+  --brand-ink:     #1d4ed8;        /* hover / link emphasis */
+  --brand-soft:    #dbeafe;        /* tinted bg for chips / icon tiles */
+  --brand-tint:    rgba(var(--brand-rgb), .06);
+
+  --star:          #f5a524;
+  --accent-live:   #34d399;        /* green "live" indicator dot */
+
+  /* ── Shadows ───────────────────────────────────────────────────────────── */
+  /* Neutral surface elevations */
+  --shadow-sm:  0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+  --shadow-md:  0 6px 16px rgba(15,23,42,.06), 0 2px 4px rgba(15,23,42,.04);
+  --shadow-lg:  0 18px 36px rgba(15,23,42,.10), 0 6px 10px rgba(15,23,42,.04);
+
+  /* Brand-tinted glow for primary buttons */
+  --shadow-brand:        0 4px 14px rgba(var(--brand-rgb), .28);
+  --shadow-brand-hover:  0 4px 18px rgba(var(--brand-rgb), .45);
+
+  /* ── Radii ─────────────────────────────────────────────────────────────── */
+  --radius-sm:   8px;
+  --radius:     14px;
+  --radius-md:  16px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+  --pill:      999px;
+
+  /* ── Spacing scale (pixel-named for unambiguous reference) ─────────────── */
+  /* Use these for: padding, margin, gap, top/right/bottom/left.
+     If a pixel value isn't in the scale below, ADD it here first. */
+  --space-2:     2px;
+  --space-3:     3px;
+  --space-4:     4px;
+  --space-5:     5px;
+  --space-6:     6px;
+  --space-8:     8px;
+  --space-10:   10px;
+  --space-12:   12px;
+  --space-14:   14px;
+  --space-16:   16px;
+  --space-20:   20px;
+  --space-24:   24px;
+  --space-28:   28px;
+  --space-32:   32px;
+  --space-40:   40px;
+  --space-48:   48px;
+  --space-56:   56px;
+  --space-64:   64px;
+  --space-72:   72px;
+  --space-88:   88px;
+  --space-100: 100px;
+  --space-120: 120px;
+  --space-144: 144px;
+  --space-180: 180px;
+
+  /* ── Layout ────────────────────────────────────────────────────────────── */
+  --container-max:  1200px;
+  --container-pad:  var(--space-24);
+
+  /* ── Breakpoints (reference only) ──────────────────────────────────────── */
+  /* CSS custom properties cannot be used inside @media queries — these vars
+     are for reference. Component @media queries MUST use the literal values
+     below. If a breakpoint changes, search/replace project-wide. */
+  --bp-tablet:  980px;
+  --bp-mobile:  720px;
+  /* No "small mobile" breakpoint — design must hold to 360px without one. */
+}
