@@ -1,0 +1,128 @@
+/* ==========================================================================
+   header.css — site header with floating pill state and mobile drawer
+   Markup: <header class="site">
+             <div class="container site-bar">
+               <a class="site-logo" href="/">Brand</a>
+               <nav class="site-nav">
+                 <a href="#">Item</a> <a href="#">Item</a>
+               </nav>
+               <div class="site-actions">
+                 <a class="btn btn-link" href="#">Sign in</a>
+                 <a class="btn btn-primary btn-sm" href="#">Get started</a>
+                 <button class="site-burger" aria-label="Open menu">≡</button>
+               </div>
+             </div>
+           </header>
+   Notes:  JS toggles `.scrolled` past 24px scrollY (rAF-throttled).
+           JS toggles `body.menu-open` to expand the mobile drawer.
+   ========================================================================== */
+
+header.site {
+  position: sticky;
+  top: var(--space-16);
+  z-index: 50;
+  margin: 0 auto;
+  transition: top .25s ease;
+}
+
+.site-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  height: 56px;
+  padding: 0 var(--space-20);
+  background: var(--bg-elevated);
+  border-radius: var(--pill);
+  box-shadow: var(--shadow-header);
+  transition: border-radius .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+header.site.scrolled {
+  top: 0;
+}
+header.site.scrolled .site-bar {
+  border-radius: 0;
+  box-shadow: var(--shadow-header-strip, var(--shadow-sm));
+  background: var(--bg);
+}
+
+.site-logo {
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-display);
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-20);
+  margin-left: auto;
+}
+.site-nav a {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--ink-2);
+}
+.site-nav a:hover { color: var(--ink); }
+
+.site-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.site-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--pill);
+  background: transparent;
+  border: 1px solid var(--line);
+  font-size: var(--fs-h3);
+  line-height: 1;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .site-nav { display: none; }
+  .site-burger { display: inline-flex; align-items: center; justify-content: center; }
+  .site-actions .btn-link { display: none; }
+}
+
+@media (max-width: 720px) {
+  header.site { top: var(--space-12); }
+  .site-bar { padding: 0 var(--space-14); height: 52px; }
+  .site-actions .btn-primary { padding: 0 var(--space-16); }
+}
+
+/* ── Mobile drawer ────────────────────────────────────────── */
+.site-drawer {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  padding: var(--space-72) var(--space-24) var(--space-24);
+  z-index: 60;
+}
+.site-drawer a {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid var(--line-2);
+  color: var(--ink);
+}
+.site-drawer-close {
+  position: absolute;
+  top: var(--space-20);
+  right: var(--space-20);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--pill);
+  background: var(--bg-3);
+  font-size: var(--fs-h3);
+}
+
+body.menu-open { overflow: hidden; }
+body.menu-open .site-drawer { display: flex; }

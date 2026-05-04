@@ -75,6 +75,8 @@
   --ink-2:       #2b3447;
   --ink-3:       #475569;
   --muted:       #6b7280;
+  --white:       #ffffff;          /* text on dark, button label, etc. */
+  --white-rgb:   255, 255, 255;    /* rgb fragment for white-tinted alpha */
 
   /* ── Surfaces ──────────────────────────────────────────────────────────── */
   --bg:          #ffffff;
@@ -99,6 +101,10 @@
 
   --star:          #f5a524;
   --accent-live:   #34d399;        /* green "live" indicator dot */
+
+  --error:         #e23a3a;        /* form errors, destructive actions */
+  --error-rgb:     226, 58, 58;
+  --error-ink:     #c12727;        /* error text (darker for contrast) */
 
   /* ── Shadows ───────────────────────────────────────────────────────────── */
   /* Neutral surface elevations */

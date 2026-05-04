@@ -1,0 +1,25 @@
+# Netlify config — copy to project root.
+# Static site, no build step. Publish directory is `starter/` (or wherever
+# index.html lives in your project).
+
+[build]
+  publish = "starter"
+  # No build command — vanilla static files.
+  command = ""
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cleaner URLs (visiting /about hits /about.html)
+[[redirects]]
+  from = "/*"
+  to = "/:splat.html"
+  status = 200
+  force = false

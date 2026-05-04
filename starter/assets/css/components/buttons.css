@@ -1,0 +1,86 @@
+/* ==========================================================================
+   buttons.css — base button + variants + sizes
+   Markup: <button class="btn btn-primary">Label</button>
+           <a class="btn btn-ghost btn-lg">Label</a>
+           <a class="btn btn-link">Label</a>
+   Notes:  Variants are independent. Sizes (.btn-sm/.btn-lg) compose with variants.
+           Primary one per screen. Default rest to ghost / link.
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  height: 48px;
+  padding: 0 var(--space-20);
+  border: 1px solid transparent;
+  border-radius: var(--pill);
+  font-size: var(--fs-btn);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-base);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease,
+              color .15s ease, box-shadow .15s ease, transform .1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* ── Variants ─────────────────────────────────────────────── */
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--white);
+  box-shadow: var(--shadow-brand);
+}
+.btn-primary:hover {
+  background: var(--brand-ink);
+  box-shadow: var(--shadow-brand-hover);
+  color: var(--white);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-ghost:hover {
+  background: var(--bg-3);
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--ink-2);
+  padding: 0 var(--space-4);
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+.btn-link:hover { color: var(--brand-ink); }
+
+/* ── Sizes ────────────────────────────────────────────────── */
+
+.btn-sm {
+  height: 40px;
+  padding: 0 var(--space-16);
+  font-size: var(--fs-btn-sm);
+}
+
+.btn-lg {
+  height: 56px;
+  padding: 0 var(--space-28);
+  font-size: var(--fs-btn-lg);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+/* CTA-blocks should compose .btn-block on mobile via the parent (e.g.
+   .hero-actions or .cta-actions). See layout.css for the action stack. */

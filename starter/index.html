@@ -1,15 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Project name</title>
   <meta name="description" content="One-line description of the page">
 
-  <!-- Token-driven theme color (update once palette is locked) -->
   <meta name="theme-color" content="#1a2333">
-
-  <!-- Favicon -->
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
 
   <!-- CSS — load order matters: tokens → base → layout → components -->
@@ -18,9 +15,40 @@
   <link rel="stylesheet" href="assets/css/layout.css">
 
   <!-- Components — order within this group is irrelevant (scoped) -->
+  <link rel="stylesheet" href="assets/css/components/buttons.css">
+  <link rel="stylesheet" href="assets/css/components/header.css">
+  <link rel="stylesheet" href="assets/css/components/footer.css">
   <link rel="stylesheet" href="assets/css/components/example-card.css">
+  <link rel="stylesheet" href="assets/css/components/faq.css">
+  <link rel="stylesheet" href="assets/css/components/form-input.css">
 </head>
 <body>
+
+  <!-- Header — floating pill, collapses to hamburger ≤980 -->
+  <header class="site">
+    <div class="container site-bar">
+      <a class="site-logo" href="/">Brand</a>
+      <nav class="site-nav">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="site-actions">
+        <a class="btn btn-link" href="#">Sign in</a>
+        <a class="btn btn-primary btn-sm" href="#">Get started</a>
+        <button class="site-burger" aria-label="Open menu" data-action="open-menu">≡</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer — toggled by JS via body.menu-open -->
+  <aside class="site-drawer" aria-hidden="true">
+    <button class="site-drawer-close" aria-label="Close menu" data-action="close-menu">×</button>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#">Sign in</a>
+  </aside>
 
   <main>
 
@@ -31,16 +59,21 @@
           <p class="kicker">Replace me</p>
           <h1>Page H1 goes here</h1>
           <p>One-line subhead. Keep it under 60ch for readability. Edit `tokens.css` to set the brand palette and font.</p>
+          <div style="display: flex; justify-content: center; gap: var(--space-12); margin-top: var(--space-24);">
+            <a class="btn btn-primary btn-lg" href="#">Get started</a>
+            <a class="btn btn-ghost btn-lg" href="#">See how it works</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Example component section — delete or replace -->
-    <section class="block alt">
+    <!-- Example feature grid -->
+    <section class="block alt" id="features">
       <div class="container">
         <div class="block-head">
-          <h2>Example cards</h2>
-          <p>One file per component. See <code>assets/css/components/example-card.css</code>.</p>
+          <p class="kicker">Features</p>
+          <h2>What this gives you</h2>
+          <p>One file per component. See <code>assets/css/components/</code>.</p>
         </div>
 
         <div class="card-grid">
@@ -60,9 +93,98 @@
       </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="block" id="faq">
+      <div class="container faq-grid">
+        <div class="faq-lead">
+          <h2>Common questions</h2>
+          <p>Edit these placeholders for your project. The disclosure widget uses native <code>&lt;details&gt;</code>, no JS required.</p>
+        </div>
+        <ul class="faq-list">
+          <li><details>
+            <summary>How do I customize the design?</summary>
+            <p>Edit <code>assets/css/tokens.css</code>. Every visual value lives there. Change the brand color and font on day 1, the rest cascades.</p>
+          </details></li>
+          <li><details>
+            <summary>Can I use this with React or Vue?</summary>
+            <p>Yes. The CSS body is portable. Swap selectors for your scoping mechanism (CSS modules, scoped Vue styles, Tailwind via <code>@apply</code>).</p>
+          </details></li>
+          <li><details>
+            <summary>Where do I get icons and photos?</summary>
+            <p>See <code>docs/assets-workflow.md</code>. Lucide for icons via CDN, Imagen / Unsplash for retina photos.</p>
+          </details></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Newsletter signup (form-input + buttons example) -->
+    <section class="block alt">
+      <div class="container">
+        <div class="block-head">
+          <h2>Stay updated</h2>
+          <p>One-line value prop. Why someone should give you their email.</p>
+        </div>
+        <form style="display: flex; gap: var(--space-12); max-width: 480px; margin: 0 auto;">
+          <div class="field" style="flex: 1;">
+            <input class="field-input" type="email" placeholder="you@email.com" required>
+          </div>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
   </main>
 
-  <!-- JS — single file, numbered sections inside -->
+  <!-- Footer -->
+  <footer class="site">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Brand</div>
+          <p>One-line tagline that explains what the company does.</p>
+        </div>
+        <nav class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Brand</p>
+        <div class="footer-meta">
+          <a href="#">Twitter</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="assets/js/main.js" defer></script>
 
 </body>

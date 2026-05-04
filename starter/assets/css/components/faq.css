@@ -1,0 +1,108 @@
+/* ==========================================================================
+   faq.css — disclosure-list FAQ with sticky lead column
+   Markup: <section class="block faq">
+             <div class="container faq-grid">
+               <div class="faq-lead">
+                 <h2>Questions answered</h2>
+                 <p>Lead paragraph. Sticky on desktop.</p>
+               </div>
+               <ul class="faq-list">
+                 <li><details>
+                   <summary>Question text</summary>
+                   <p>Answer text.</p>
+                 </details></li>
+                 ...
+               </ul>
+             </div>
+           </section>
+   Notes:  Uses native <details>/<summary> — no JS required.
+           Lead column is sticky on desktop; flows above list on mobile.
+   ========================================================================== */
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-72);
+  align-items: start;
+}
+
+.faq-lead {
+  position: sticky;
+  top: var(--space-100);
+}
+.faq-lead h2 {
+  font-size: var(--fs-h2-faq, var(--fs-h2));
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-heading);
+  margin: 0 0 var(--space-16);
+}
+.faq-lead p {
+  color: var(--ink-3);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-prose);
+}
+
+.faq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-list li {
+  border-bottom: 1px solid var(--line);
+}
+.faq-list li:first-child { border-top: 1px solid var(--line); }
+
+.faq-list details {
+  padding: var(--space-20) 0;
+}
+.faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-bold);
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  letter-spacing: var(--ls-snug);
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+  color: var(--ink-3);
+  transition: transform .2s ease;
+}
+.faq-list details[open] > summary::after {
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+}
+.faq-list details > p {
+  margin: var(--space-12) 0 0;
+  color: var(--ink-3);
+  font-size: var(--fs-body);
+  line-height: var(--lh-prose);
+  max-width: 60ch;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .faq-grid { grid-template-columns: 1fr; gap: var(--space-32); }
+  .faq-lead { position: static; }
+}
+
+@media (max-width: 720px) {
+  .faq-grid { gap: var(--space-24); }
+  .faq-list summary { font-size: var(--fs-body); }
+  .faq-list details { padding: var(--space-16) 0; }
+}
